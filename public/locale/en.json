@@ -1,0 +1,47 @@
+{
+  "common" : {
+    "HEADER_AUTHORIZATION_NOT_SENT": "Header Authorization not sent",
+    "EMPTY_TOKEN_OR_NOT_RECEIVED": "Empty token or not received",
+    "YOUR_USER_ROLE_DOES_NOT_HAVE_THIS_FEATURE": "Your user role does not have this feature",
+    "BAD_TOKEN_GET_A_NEW_ONE": "Bad token, get a new one",
+    "SUCCESSFUL_REQUEST": "Succesfull request",
+    "CREATED_SUCCESSFULLY": "Created successfully",
+    "THERE_IS_ALREADY_A_RECORD_WITH_THAT_NAME": "There is already a record with that name",
+    "UPDATED_SUCCESSFULLY": "Updated successfully",
+    "DELETED_SUCCESSFULLY": "Deleted successfully",
+    "THERE_HAS_BEEN_AN_ERROR": "There has been an error",
+    "INCOMPLETE_DATA_RECEIVED": "Incomplete data received",
+    "NO_RECORDS": "No records",
+    "COULD_NOT_BE_CREATED": "Could not be created",
+    "NOT_FOUND": "Not found",
+    "COULD_NOT_BE_DELETED": "Could not be deleted",
+    "COULD_NOT_BE_UPDATED": "Could not be updated"
+  },
+  "login" : {
+    "USER_IS_NOT_REGISTERED": "User is not registered",
+    "USER_BLOCKED": "User blocked",
+    "USER_UNAUTHORIZED": "User unauthorized",
+    "WRONG_USER_PASSWORD": "Wrong user password",
+    "TOO_MANY_FAILED_LOGIN_ATTEMPTS": "Too many failed login attempts",
+  },
+  "profile" : {
+    "PROFILE_NOT_FOUND": "Profile not found",
+    "PROFILE_UPDATED": "Profile updated",
+    "PROFILE_COULD_NOT_BE_UPDATED": "Profile could not be updated",
+    "ANOTHER_USER_ALREADY_REGISTERED_WITH_THIS_USERNAME": "Another user already registered with this username"
+  },
+  "change-password" : {
+    "PASSWORD_COULD_NOT_BE_UPDATED": "Password could not be updated",
+    "PASSWORD_SUCCESSFULLY_UPDATED": "Password updated successfully",
+    "WRONG_CURRENT_PASSWORD": "Wrong current password"
+  },
+  "validation": {
+    "name": {
+      "REQUIRED": "The name is required"
+    },
+    "email": {
+      "REQUIRED": "The email is required",
+      "EXISTS": "The email already exists"
+    }
+  }
+}

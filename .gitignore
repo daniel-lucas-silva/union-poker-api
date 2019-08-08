@@ -1,0 +1,8 @@
+composer.lock
+/.idea
+/vendor
+/src/cache
+/public/files
+/.scannerwork
+sonar-project.properties
+config.json

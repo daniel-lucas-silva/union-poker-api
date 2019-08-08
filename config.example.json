@@ -1,0 +1,35 @@
+{
+  "baseUri": "http://union.poker",
+  "database": {
+    "host": "127.0.0.1",
+    "username": "root",
+    "password": "root",
+    "dbname": "union.poker",
+    "charset": "utf8"
+  },
+  "log_database": {
+    "host": "127.0.0.1",
+    "username": "root",
+    "password": "root",
+    "dbname": "union.poker.log",
+    "charset": "utf8"
+  },
+  "authentication": {
+    "secret": "d41d8cd98f00b204e9800998ecf8427e",
+    "encryption_key": "ae2b1fca515949e5d54fb22b8ed95575",
+    "expiration_time": 2592000,
+    "iss": "api.union.poker",
+    "aud": "api.union.poker"
+  },
+  "mail": {
+    "fromName": "John",
+    "fromEmail": "john@gmail.com",
+    "smtp": {
+      "server": "smtp.gmail.com",
+      "port": 587,
+      "security": "tls",
+      "username": "",
+      "password": ""
+    }
+  }
+}

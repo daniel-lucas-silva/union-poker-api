@@ -1,0 +1,15 @@
+{
+    "name": "daniel-lucas-silva/union-poker-server",
+    "description": "some description",
+    "require": {
+        "firebase/php-jwt": "^5.0",
+        "ext-json": "*",
+        "phalcon/incubator": "^3.4"
+    },
+    "authors": [
+        {
+            "name": "daniel-lucas-silva",
+            "email": "dluc18@gmail.com"
+        }
+    ]
+}
