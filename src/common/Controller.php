@@ -80,7 +80,7 @@ class Controller extends \Phalcon\Mvc\Controller {
    */
   public function tryToSaveData($element, $customMessage = 'common.THERE_HAS_BEEN_AN_ERROR')
   {
-    if (!$element->save()) {
+    if (!$element->update()) {
       // Send errors
       $errors = array();
       foreach ($element->getMessages() as $message) {
@@ -420,6 +420,22 @@ class Controller extends \Phalcon\Mvc\Controller {
     $token = $this->jwt->decode($token, $this->tokenConfig['secret'], array('HS256'));
     return $token;
   }
+
+    /**
+     * @param $plaintext
+     * @return string
+     */
+    function encrypt($plaintext) {
+        return openssl_encrypt($plaintext, "AES-128-ECB", $this->tokenConfig['secret']);
+    }
+
+    /**
+     * @param $data
+     * @return string
+     */
+    function decrypt($data) {
+        return openssl_decrypt($data, "AES-128-ECB", $this->tokenConfig['secret']);
+    }
 
   /**
    * Returns token from the request.

@@ -9,6 +9,7 @@ use Phalcon\Mvc\Model;
  */
 class PasswordResets extends Model
 {
+  public $id;
   public $email;
   public $token;
   public $created_at;
@@ -29,12 +30,34 @@ class PasswordResets extends Model
     return 'password_resets';
   }
 
+    /**
+     * Allows to query a set of records that match the specified conditions
+     *
+     * @param mixed $parameters
+     * @return Users[]
+     */
+    public static function find($parameters = null)
+    {
+        return parent::find($parameters);
+    }
+    /**
+     * Allows to query the first record that match the specified conditions
+     *
+     * @param mixed $parameters
+     * @return Users
+     */
+    public static function findFirst($parameters = null)
+    {
+        return parent::findFirst($parameters);
+    }
+
   /**
    * @return array
    */
   public function columnMap()
   {
     return array(
+      'id' => 'id',
       'email' => 'email',
       'token' => 'token',
       'created_at' => 'created_at',

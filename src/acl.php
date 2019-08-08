@@ -25,47 +25,26 @@ $acl->addInherit('admin', 'manager');
 $arrResources = [
     'guest' => [
         'Index' => ['index'],
-        'ContactUs' => ['send'],
-        'Users' => ['profile', 'login', 'register', 'facebook', 'google', 'changePassword'],
-        'Posts' => ['all', 'get'],
-        'Images' => ['all', 'get'],
-        'Pages' => ['all', 'get'],
-        'Sliders' => ['all', 'get'],
-        'Reports' => ['create'],
-        'Tags' => ['all', 'get'],
+        'Users' => ['profile', 'login', 'recoverPassword', 'resetPassword', 'verifyRecoveryToken'],
         'Categories' => ['all', 'get'],
-        'Comments' => ['all', 'get'],
-        'Reactions' => ['get'],
     ],
     'player' => [
-        'Users' => ['me', 'update', 'resetPassword'],
+        'Users' => ['me', 'update', 'changePassword'],
         'Searches' => ['all', 'create'],
-        'Posts' => ['react', 'reactions'],
-        'Comments' => ['create', 'update', 'delete', 'react', 'reactions'],
-        'Reactions' => ['create', 'update', 'delete'],
     ],
     'operator' => [
-        'Posts' => ['create', 'update'],
         'Images' => ['create', 'update'],
     ],
     'agent' => [
-        'Posts' => ['create', 'update'],
         'Images' => ['create', 'update'],
     ],
     'manager' => [
-        'Posts' => ['create', 'update'],
         'Images' => ['create', 'update'],
     ],
     'admin' => [
         'Users' => ['delete', 'create', 'block'],
-        'ContactUs' => ['all', 'get', 'update', 'delete'],
-        'Posts' => ['delete'],
         'Images' => ['delete'],
-        'Pages' => ['create', 'update', 'delete'],
-        'Tags' => ['create', 'update', 'delete'],
         'Categories' => ['create', 'update', 'delete'],
-        'Reactions' => ['all', 'get'],
-        'Reports' => ['all', 'get', 'update', 'delete'],
     ],
 ];
 

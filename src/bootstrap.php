@@ -8,9 +8,9 @@ use Phalcon\Mvc\Url;
 use Phalcon\Db\Adapter\Pdo\Mysql;
 use Phalcon\Crypt;
 use Firebase\JWT\JWT;
+use PHPMailer\PHPMailer\PHPMailer;
 use Phalcon\Cache\Frontend\Data as FrontendData;
 use Phalcon\Cache\Backend\File as BackFile;
-use Phalcon\Mailer\Manager as MailerManager;
 
 define('APPLICATION_ENV', getenv('APPLICATION_ENV') ?: 'production');
 
@@ -70,7 +70,17 @@ try {
     $di->setShared('mailer', function () {
         $config = $this->getConfig();
         $mailerConfig = $config->mail->toArray();
-        return new MailerManager($mailerConfig);
+        $mail = new PHPMailer(true);
+        $mail->SMTPDebug = APPLICATION_ENV === 'development' ? 2 : 1;   // Enable verbose debug output
+        $mail->isSMTP();                                                // Set mailer to use SMTP
+        $mail->Host       = $mailerConfig['host'];      // Specify main and backup SMTP servers
+        $mail->SMTPAuth   = true;                                       // Enable SMTP authentication
+        $mail->Username   = $mailerConfig['username'];                         // SMTP username
+        $mail->Password   = $mailerConfig['password'];                                   // SMTP password
+        $mail->SMTPSecure = $mailerConfig['encryption'];                                      // Enable TLS encryption, `ssl` also accepted
+        $mail->Port       = $mailerConfig['port'];
+        $mail->setFrom($mailerConfig['from']['email'], $mailerConfig['from']['name']);
+        return $mail;
     });
 
     /**

@@ -38,8 +38,10 @@ $users->patch('/{id}', 'update');
 $users->delete('/{id}', 'delete');
 $users->get('/me', 'me');
 $users->post('/login', 'login');
-$users->post('/register', 'register');
 $users->patch('/change-password', 'changePassword');
+$users->post('/recover-password', 'recoverPassword');
+$users->post('/reset-password', 'resetPassword');
+$users->post('/verify-recovery-token', 'verifyRecoveryToken');
 $app->mount($users);
 
 /**
