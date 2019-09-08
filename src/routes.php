@@ -37,17 +37,17 @@ $users->post('/verify-recovery-token', 'verifyRecoveryToken');
 $app->mount($users);
 
 /**
- * Categories routes
+ * Banks routes
  */
-$categories = new Collection();
-$categories->setHandler('App\Controllers\CategoriesController', true);
-$categories->setPrefix('/categories');
-$categories->get('/', 'all');
-$categories->post('/', 'create');
-$categories->get('/{id}', 'get');
-$categories->patch('/{id}', 'update');
-$categories->delete('/{id}', 'delete');
-$app->mount($categories);
+$banks = new Collection();
+$banks->setHandler('App\Controllers\BanksController', true);
+$banks->setPrefix('/banks');
+$banks->get('/', 'all');
+$banks->post('/', 'create');
+$banks->get('/{id}', 'get');
+$banks->patch('/{id}', 'update');
+$banks->delete('/{id}', 'delete');
+$app->mount($banks);
 
 /**
  * Not Found handler

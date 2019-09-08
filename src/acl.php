@@ -31,6 +31,7 @@ $arrResources = [
     'agent' => [],
     'manager' => [],
     'admin' => [
+        'Banks' => ['delete', 'all', 'create', 'update', 'get'],
         'Users' => ['delete', 'all', 'create', 'block'],
     ],
 ];

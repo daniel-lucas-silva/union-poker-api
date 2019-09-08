@@ -3,21 +3,25 @@
 namespace App\Controllers;
 
 use App\Common\Controller;
-use App\Models\Categories;
+use App\Models\Banks;
 use App\ResponseException;
 use Exception;
 
-class CategoriesController extends Controller
+/**
+ * Class BanksController
+ * @package App\Controllers
+ */
+class BanksController extends Controller
 {
 
   /**
    * @param $body
-   * @return Categories
+   * @return Banks
    * @throws ResponseException
    */
   private function createCategory(array $body)
   {
-    $category = new Categories();
+    $category = new Banks();
     $category->name = trim($body['name']);
     $this->tryToSaveData($category, 'common.COULD_NOT_BE_CREATED');
     return $category;
@@ -43,7 +47,7 @@ class CategoriesController extends Controller
   {
     try {
       $this->initializeGet();
-      $model = new Categories();
+      $model = new Banks();
       $options = $this->buildOptions('name asc');
       $filters = $this->buildFilters($this->request->get('filter'));
       $categories = $this->findElements($model, $filters['conditions'], $filters['parameters'], 'id, name', $options['order_by'], $options['offset'], $options['limit'], true);
@@ -68,7 +72,7 @@ class CategoriesController extends Controller
       $rawBody = $this->request->getJsonRawBody(true);
       $this->checkForEmptyData($rawBody, ['name']);
       $category = $this->createCategory($rawBody);
-//      $this->registerLog();
+      $this->registerLog();
       $this->buildSuccessResponse(201, 'common.CREATED_SUCCESSFULLY', $category->toArray());
     }
     catch (ResponseException $e) {
@@ -85,7 +89,7 @@ class CategoriesController extends Controller
   {
     try {
       $this->initializeGet();
-      $model = new Categories();
+      $model = new Banks();
       $category = $this->findElementById($model, $id);
       $this->buildSuccessResponse(200, 'common.SUCCESSFUL_REQUEST', $category->toArray());
     }
@@ -104,11 +108,11 @@ class CategoriesController extends Controller
   {
     try {
       $this->initializePatch();
-      $model = new Categories();
+      $model = new Banks();
       $rawBody = $this->request->getJsonRawBody(true);
       $this->checkForEmptyData($rawBody, ['name']);
       $category = $this->updateCategory($this->findElementById($model, $id), $rawBody);
-//      $this->registerLog();
+      $this->registerLog();
       $this->buildSuccessResponse(200, 'common.UPDATED_SUCCESSFULLY', $category->toArray());
     }
     catch (ResponseException $e) {
@@ -126,9 +130,9 @@ class CategoriesController extends Controller
   {
     try {
       $this->initializeDelete();
-      $model = new Categories();
+      $model = new Banks();
       $this->tryToDeleteData($this->findElementById($model, $id));
-//      $this->registerLog();
+      $this->registerLog();
       $this->buildSuccessResponse(200, 'common.DELETED_SUCCESSFULLY');
     }
     catch (ResponseException $e) {
