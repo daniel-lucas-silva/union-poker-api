@@ -50,6 +50,19 @@ $banks->delete('/{id}', 'delete');
 $app->mount($banks);
 
 /**
+ * Clubs routes
+ */
+$clubs = new Collection();
+$clubs->setHandler('App\Controllers\ClubsController', true);
+$clubs->setPrefix('/clubs');
+$clubs->get('/', 'all');
+$clubs->post('/', 'create');
+$clubs->get('/{id}', 'get');
+$clubs->patch('/{id}', 'update');
+$clubs->delete('/{id}', 'delete');
+$app->mount($clubs);
+
+/**
  * Not Found handler
  */
 $app->notFound(function () use ($app) {
