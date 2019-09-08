@@ -16,35 +16,22 @@ $acl->addRole(new Role('agent'));
 $acl->addRole(new Role('manager'));
 $acl->addRole(new Role('admin'));
 
-$acl->addInherit('operator', 'player');
-$acl->addInherit('agent', 'player');
-$acl->addInherit('agent', 'operator');
-$acl->addInherit('admin', 'agent');
-$acl->addInherit('admin', 'manager');
+//$acl->addInherit('operator', 'player');
+//$acl->addInherit('agent', 'player');
+//$acl->addInherit('agent', 'operator');
+//$acl->addInherit('admin', 'agent');
+//$acl->addInherit('admin', 'manager');
 
 $arrResources = [
     'guest' => [
-        'Index' => ['index'],
-        'Users' => ['profile', 'login', 'recoverPassword', 'resetPassword', 'verifyRecoveryToken'],
-        'Categories' => ['all', 'get'],
+        'Users' => ['login', 'recoverPassword', 'resetPassword', 'verifyRecoveryToken'],
     ],
-    'player' => [
-        'Users' => ['me', 'update', 'changePassword'],
-        'Searches' => ['all', 'create'],
-    ],
-    'operator' => [
-        'Images' => ['create', 'update'],
-    ],
-    'agent' => [
-        'Images' => ['create', 'update'],
-    ],
-    'manager' => [
-        'Images' => ['create', 'update'],
-    ],
+    'player' => [],
+    'operator' => [],
+    'agent' => [],
+    'manager' => [],
     'admin' => [
-        'Users' => ['delete', 'create', 'block'],
-        'Images' => ['delete'],
-        'Categories' => ['create', 'update', 'delete'],
+        'Users' => ['delete', 'all', 'create', 'block'],
     ],
 ];
 

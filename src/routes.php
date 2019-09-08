@@ -18,14 +18,6 @@ $app = new Micro($di);
 $app->before(new Acl());
 
 /**
- * Index routes
- */
-$index = new Collection();
-$index->setHandler('App\Controllers\IndexController', true);
-$index->get('/', 'index');
-$app->mount($index);
-
-/**
  * Users routes
  */
 $users = new Collection();
@@ -63,11 +55,11 @@ $app->mount($categories);
 $app->notFound(function () use ($app) {
     $app->response->setStatusCode(404, "Not Found")->sendHeaders();
     $app->response->setContentType('application/json', 'UTF-8');
-    $app->response->setJsonContent(array(
+    $app->response->setJsonContent([
         "status" => "error",
         "code" => "404",
         "messages" => "URL Not found",
-    ));
+    ]);
     $app->response->send();
 });
 
@@ -78,17 +70,15 @@ $app->error(function ($exception) use ($app) {
     if (APPLICATION_ENV != 'development') {
         $app->response->setStatusCode(500, "Internal Server Error")->sendHeaders();
         $app->response->setContentType('application/json', 'UTF-8');
-        $app->response->setJsonContent(array(
+        $app->response->setJsonContent([
             "status" => "error",
             "code" => "500",
             "messages" => "Internal Server Error"
-        ));
+        ]);
         $app->response->send();
         exit;
     }
     return $exception;
 });
 
-//$request = new Request();
-//$app->handle($request->getURI());
 $app->handle();

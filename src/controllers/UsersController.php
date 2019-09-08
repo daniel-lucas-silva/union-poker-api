@@ -43,7 +43,7 @@ class UsersController extends Controller
         $user->email = trim($body['email']);
         $user->username = trim($body['username']);
         $user->name = trim($body['name']);
-        $user->role = trim($body['type']);
+        $user->role = trim($body['role']);
         $user->active = 1;
         $user->password = password_hash($body['password'], PASSWORD_BCRYPT);
         $this->tryToSaveData($user, 'common.COULD_NOT_BE_CREATED');
@@ -390,7 +390,6 @@ class UsersController extends Controller
             $this->initializePost();
             $rawBody = $this->request->getJsonRawBody(true) ?: [];
             $this->checkForEmptyData($rawBody, ['identity', 'password']);
-            $this->checkIfHeadersExist($this->request->getHeaders());
 
             $user = $this->findUser($rawBody['identity']);
             $password = $rawBody['password'];

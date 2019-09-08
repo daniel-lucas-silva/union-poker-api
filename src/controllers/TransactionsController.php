@@ -3,52 +3,52 @@
 namespace App\Controllers;
 
 use App\Common\Controller;
-use App\Models\Images;
+use App\Models\Categories;
 use App\ResponseException;
 use Exception;
 
-class ImagesController extends Controller
+class TransactionsController extends Controller
 {
 
   /**
    * @param $body
-   * @return Images
+   * @return Categories
    * @throws ResponseException
    */
-  private function createImage(array $body)
+  private function createCategory(array $body)
   {
-    $image = new Images();
-    $image->name = trim($body['name']);
-    $this->tryToSaveData($image, 'common.COULD_NOT_BE_CREATED');
-    return $image;
+    $category = new Categories();
+    $category->name = trim($body['name']);
+    $this->tryToSaveData($category, 'common.COULD_NOT_BE_CREATED');
+    return $category;
   }
 
   /**
-   * @param $image
+   * @param $category
    * @param $body
    * @return mixed
    * @throws ResponseException
    */
-  private function updateImage($image, $body)
+  private function updateCategory($category, $body)
   {
-    $image->name = trim($body['name']);
-    $this->tryToSaveData($image, 'common.COULD_NOT_BE_UPDATED');
-    return $image;
+    $category->name = trim($body['name']);
+    $this->tryToSaveData($category, 'common.COULD_NOT_BE_UPDATED');
+    return $category;
   }
 
   /**
-   * Get images
+   * Get categories
    */
   public function all()
   {
     try {
       $this->initializeGet();
-      $model = new Images();
+      $model = new Categories();
       $options = $this->buildOptions('name asc');
       $filters = $this->buildFilters($this->request->get('filter'));
-      $images = $this->findElements($model, $filters['conditions'], $filters['parameters'], 'id, name', $options['order_by'], $options['offset'], $options['limit'], true);
+      $categories = $this->findElements($model, $filters['conditions'], $filters['parameters'], 'id, name', $options['order_by'], $options['offset'], $options['limit'], true);
       $total = $this->calculateTotalElements($model, $filters['conditions'], $filters['parameters'], true);
-      $data = $this->buildListingObject($images, $options['rows'], $total);
+      $data = $this->buildListingObject($categories, $options['rows'], $total);
       $this->buildSuccessResponse(200, 'common.SUCCESSFUL_REQUEST', $data);
     }
     catch (ResponseException $e) {
@@ -58,7 +58,7 @@ class ImagesController extends Controller
     }
   }
 
-  /** Create a new image
+  /** Create a new category
    * @throws Exception
    */
   public function create()
@@ -67,9 +67,9 @@ class ImagesController extends Controller
       $this->initializePost();
       $rawBody = $this->request->getJsonRawBody(true);
       $this->checkForEmptyData($rawBody, ['name']);
-      $image = $this->createImage($rawBody);
-      $this->registerLog();
-      $this->buildSuccessResponse(201, 'common.CREATED_SUCCESSFULLY', $image->toArray());
+      $category = $this->createCategory($rawBody);
+//      $this->registerLog();
+      $this->buildSuccessResponse(201, 'common.CREATED_SUCCESSFULLY', $category->toArray());
     }
     catch (ResponseException $e) {
       $this->buildErrorResponse($e->getCode(), $e->getMessage(), $e->getData());
@@ -78,16 +78,16 @@ class ImagesController extends Controller
     }
   }
 
-  /** Get a image
+  /** Get a category
    * @param $id
    */
   public function get($id)
   {
     try {
       $this->initializeGet();
-      $model = new Images();
-      $image = $this->findElementById($model, $id);
-      $this->buildSuccessResponse(200, 'common.SUCCESSFUL_REQUEST', $image->toArray());
+      $model = new Categories();
+      $category = $this->findElementById($model, $id);
+      $this->buildSuccessResponse(200, 'common.SUCCESSFUL_REQUEST', $category->toArray());
     }
     catch (ResponseException $e) {
       $this->buildErrorResponse($e->getCode(), $e->getMessage(), $e->getData());
@@ -96,7 +96,7 @@ class ImagesController extends Controller
     }
   }
 
-  /** Update a image
+  /** Update a category
    * @param $id
    * @throws Exception
    */
@@ -104,12 +104,12 @@ class ImagesController extends Controller
   {
     try {
       $this->initializePatch();
-      $model = new Images();
+      $model = new Categories();
       $rawBody = $this->request->getJsonRawBody(true);
       $this->checkForEmptyData($rawBody, ['name']);
-      $image = $this->updateImage($this->findElementById($model, $id), $rawBody);
-      $this->registerLog();
-      $this->buildSuccessResponse(200, 'common.UPDATED_SUCCESSFULLY', $image->toArray());
+      $category = $this->updateCategory($this->findElementById($model, $id), $rawBody);
+//      $this->registerLog();
+      $this->buildSuccessResponse(200, 'common.UPDATED_SUCCESSFULLY', $category->toArray());
     }
     catch (ResponseException $e) {
       $this->buildErrorResponse($e->getCode(), $e->getMessage(), $e->getData());
@@ -118,7 +118,7 @@ class ImagesController extends Controller
     }
   }
 
-  /** Delete a image
+  /** Delete a category
    * @param $id
    * @throws Exception
    */
@@ -126,9 +126,9 @@ class ImagesController extends Controller
   {
     try {
       $this->initializeDelete();
-      $model = new Images();
+      $model = new Categories();
       $this->tryToDeleteData($this->findElementById($model, $id));
-      $this->registerLog();
+//      $this->registerLog();
       $this->buildSuccessResponse(200, 'common.DELETED_SUCCESSFULLY');
     }
     catch (ResponseException $e) {

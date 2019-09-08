@@ -26,6 +26,7 @@ class Acl extends Controller implements MiddlewareInterface
          * @global \Phalcon\Acl $acl
          */
         include __DIR__ . '/../acl.php';
+
         $arrHandler = $app->getActiveHandler();
         //get the controller for this handler
         $array = (array) $arrHandler[0];
