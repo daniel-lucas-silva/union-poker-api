@@ -5,10 +5,10 @@ namespace App\Models;
 use App\Common\CacheableModel;
 
 /**
- * Class Clubs
+ * Class TransactionsStatus
  * @package App\Models
  */
-class Clubs extends CacheableModel
+class TransactionsStatus extends CacheableModel
 {
     public $id;
     public $name;
@@ -20,12 +20,8 @@ class Clubs extends CacheableModel
      */
     public function initialize()
     {
-        self::$key = 'clubs';
-        $this->setConnectionService('db');
-
-        $this->hasMany( 'id', 'Transactions', 'club_id',
-            ['alias' => 'transactions']
-        );
+        self::$key = 'transactions_status';
+        $this->setConnectionService('db'); // Connection service for log database
     }
 
     /**
@@ -33,7 +29,7 @@ class Clubs extends CacheableModel
      */
     public function getSource()
     {
-        return 'clubs';
+        return 'transactions_status';
     }
 
     /**

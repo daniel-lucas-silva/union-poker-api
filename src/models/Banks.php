@@ -28,7 +28,11 @@ class Banks extends CacheableModel
     public function initialize()
     {
         self::$key = 'banks';
-        $this->setConnectionService('db'); // Connection service for log database
+        $this->setConnectionService('db');
+
+        $this->hasMany( 'id', 'Transactions', 'bank_id',
+//            ['alias' => 'transactions']
+        );
     }
 
     /**

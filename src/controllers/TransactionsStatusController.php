@@ -3,56 +3,56 @@
 namespace App\Controllers;
 
 use App\Common\Controller;
-use App\Models\Clubs;
+use App\Models\TransactionsStatus;
 use App\ResponseException;
 use Exception;
 
 /**
- * Class ClubsController
+ * Class TransactionsStatusController
  * @package App\Controllers
  */
-class ClubsController extends Controller
+class TransactionsStatusController extends Controller
 {
 
   /**
    * @param $body
-   * @return Clubs
+   * @return TransactionsStatus
    * @throws ResponseException
    */
-  private function createClub(array $body)
+  private function createStatus(array $body)
   {
-    $club = new Clubs();
-    $club->name = trim($body['name']);
-    $this->tryToSaveData($club, 'common.COULD_NOT_BE_CREATED');
-    return $club;
+    $status = new TransactionsStatus();
+    $status->name = trim($body['name']);
+    $this->tryToSaveData($status, 'common.COULD_NOT_BE_CREATED');
+    return $status;
   }
 
   /**
-   * @param $club
+   * @param $status
    * @param $body
    * @return mixed
    * @throws ResponseException
    */
-  private function updateClub($club, $body)
+  private function updateStatus($status, $body)
   {
-    $club->name = trim($body['name']);
-    $this->tryToSaveData($club, 'common.COULD_NOT_BE_UPDATED');
-    return $club;
+    $status->name = trim($body['name']);
+    $this->tryToSaveData($status, 'common.COULD_NOT_BE_UPDATED');
+    return $status;
   }
 
   /**
-   * Get clubs
+   * Get status
    */
   public function all()
   {
     try {
       $this->initializeGet();
-      $model = new Clubs();
+      $model = new TransactionsStatus();
       $options = $this->buildOptions('name asc');
       $filters = $this->buildFilters($this->request->get('filter'));
-      $clubs = $this->findElements($model, $filters['conditions'], $filters['parameters'], 'id, name', $options['order_by'], $options['offset'], $options['limit'], true);
+      $status = $this->findElements($model, $filters['conditions'], $filters['parameters'], 'id, name', $options['order_by'], $options['offset'], $options['limit'], true);
       $total = $this->calculateTotalElements($model, $filters['conditions'], $filters['parameters'], true);
-      $data = $this->buildListingObject($clubs, $options['rows'], $total);
+      $data = $this->buildListingObject($status, $options['rows'], $total);
       $this->buildSuccessResponse(200, 'common.SUCCESSFUL_REQUEST', $data);
     }
     catch (ResponseException $e) {
@@ -62,7 +62,7 @@ class ClubsController extends Controller
     }
   }
 
-  /** Create a new club
+  /** Create a new status
    * @throws Exception
    */
   public function create()
@@ -71,9 +71,9 @@ class ClubsController extends Controller
       $this->initializePost();
       $rawBody = $this->request->getJsonRawBody(true);
       $this->checkForEmptyData($rawBody, ['name']);
-      $club = $this->createClub($rawBody);
-      $this->registerLog();
-      $this->buildSuccessResponse(201, 'common.CREATED_SUCCESSFULLY', $club->toArray());
+      $status = $this->createStatus($rawBody);
+//      $this->registerLog();
+      $this->buildSuccessResponse(201, 'common.CREATED_SUCCESSFULLY', $status->toArray());
     }
     catch (ResponseException $e) {
       $this->buildErrorResponse($e->getCode(), $e->getMessage(), $e->getData());
@@ -82,16 +82,16 @@ class ClubsController extends Controller
     }
   }
 
-  /** Get a club
+  /** Get a status
    * @param $id
    */
   public function get($id)
   {
     try {
       $this->initializeGet();
-      $model = new Clubs();
-      $club = $this->findElementById($model, $id);
-      $this->buildSuccessResponse(200, 'common.SUCCESSFUL_REQUEST', $club->toArray());
+      $model = new TransactionsStatus();
+      $status = $this->findElementById($model, $id);
+      $this->buildSuccessResponse(200, 'common.SUCCESSFUL_REQUEST', $status->toArray());
     }
     catch (ResponseException $e) {
       $this->buildErrorResponse($e->getCode(), $e->getMessage(), $e->getData());
@@ -100,7 +100,7 @@ class ClubsController extends Controller
     }
   }
 
-  /** Update a club
+  /** Update a status
    * @param $id
    * @throws Exception
    */
@@ -108,12 +108,12 @@ class ClubsController extends Controller
   {
     try {
       $this->initializePatch();
-      $model = new Clubs();
+      $model = new TransactionsStatus();
       $rawBody = $this->request->getJsonRawBody(true);
       $this->checkForEmptyData($rawBody, ['name']);
-      $club = $this->updateClub($this->findElementById($model, $id), $rawBody);
-      $this->registerLog();
-      $this->buildSuccessResponse(200, 'common.UPDATED_SUCCESSFULLY', $club->toArray());
+      $status = $this->updateStatus($this->findElementById($model, $id), $rawBody);
+//      $this->registerLog();
+      $this->buildSuccessResponse(200, 'common.UPDATED_SUCCESSFULLY', $status->toArray());
     }
     catch (ResponseException $e) {
       $this->buildErrorResponse($e->getCode(), $e->getMessage(), $e->getData());
@@ -122,7 +122,7 @@ class ClubsController extends Controller
     }
   }
 
-  /** Delete a club
+  /** Delete a status
    * @param $id
    * @throws Exception
    */
@@ -130,9 +130,9 @@ class ClubsController extends Controller
   {
     try {
       $this->initializeDelete();
-      $model = new Clubs();
+      $model = new TransactionsStatus();
       $this->tryToDeleteData($this->findElementById($model, $id));
-      $this->registerLog();
+//      $this->registerLog();
       $this->buildSuccessResponse(200, 'common.DELETED_SUCCESSFULLY');
     }
     catch (ResponseException $e) {

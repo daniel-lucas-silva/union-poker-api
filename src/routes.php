@@ -63,6 +63,19 @@ $clubs->delete('/{id}', 'delete');
 $app->mount($clubs);
 
 /**
+ * TransactionsStatus routes
+ */
+$transactions_status = new Collection();
+$transactions_status->setHandler('App\Controllers\TransactionsStatusController', true);
+$transactions_status->setPrefix('/transactions-status');
+$transactions_status->get('/', 'all');
+$transactions_status->post('/', 'create');
+$transactions_status->get('/{id}', 'get');
+$transactions_status->patch('/{id}', 'update');
+$transactions_status->delete('/{id}', 'delete');
+$app->mount($transactions_status);
+
+/**
  * Not Found handler
  */
 $app->notFound(function () use ($app) {

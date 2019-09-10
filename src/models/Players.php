@@ -8,33 +8,25 @@ use Phalcon\Validation\Validator\Email as EmailValidator;
 use Phalcon\Validation\Validator\Uniqueness as UniquenessValidator;
 
 /**
- * Class User
+ * Class Players
  * @property string id
+ * @property string agent_id
  * @property string email
  * @property string username
  * @property string password
  * @property string name
  * @property string avatar
- * @property string role
- * @property string active
- * @property string login_attempts
- * @property string last_login
- * @property string block_expires
  * @package App\Models
  */
-class Users extends CacheableModel {
+class Players extends CacheableModel {
 
   public $id;
+  public $agent_id;
   public $email;
   public $username;
   public $password;
   public $name;
   public $avatar;
-  public $role;
-  public $active;
-  public $login_attempts;
-  public $last_login;
-  public $block_expires;
   public $created_at;
   public $updated_at;
 
@@ -43,15 +35,15 @@ class Users extends CacheableModel {
    */
   public function initialize()
   {
-    self::$key = "users";
+    self::$key = 'players';
     $this->setConnectionService('db');
 
-    $this->hasMany( 'id', 'Transactions', 'operator_id',
+    $this->hasMany( 'id', 'Transactions', 'player_id',
       ['alias' => 'transactions']
     );
 
-      $this->hasMany( 'id', 'Players', 'agent_id',
-          ['alias' => 'players']
+      $this->belongsTo( 'agent_id', 'Users', 'id',
+          ['alias' => 'agent']
       );
   }
 
@@ -83,7 +75,7 @@ class Users extends CacheableModel {
    */
   public function getSource()
   {
-    return 'users';
+    return 'players';
   }
 
   /**
@@ -96,16 +88,12 @@ class Users extends CacheableModel {
   {
     return [
       'id' => 'id',
+      'agent_id' => 'agent_id',
       'email' => 'email',
       'username' => 'username',
       'password' => 'password',
       'name' => 'name',
       'avatar' => 'avatar',
-      'role' => 'role',
-      'active' => 'active',
-      'login_attempts' => 'login_attempts',
-      'last_login' => 'last_login',
-      'block_expires' => 'block_expires',
       'created_at' => 'created_at',
       'updated_at' => 'updated_at',
     ];
